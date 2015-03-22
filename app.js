@@ -9,7 +9,7 @@ var express = require('express'),
     _ = require('lodash'),
     handlebars = require('handlebars'),
     // jugo library (local ref)
-    jugo = require('../jugo'),
+    jugo = require('jugo'),
     // jugo config
     jugo_config = require('./jugo.json');
 

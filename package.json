@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "express": "^4.12.3",
+    "handlebars": "^3.0.0",
+    "jugo": "0.0.4",
+    "lodash": "^3.5.0"
+  }
+}
