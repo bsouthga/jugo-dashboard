@@ -24,8 +24,8 @@ var aboutTemplate = handlebars.compile(
 
 
 // express app + jugo objects
-var app = express(),
-    J = jugo(jugo_config);
+var app = express();
+var J = jugo(jugo_config);
 
 J.open(function() {
   console.log('database open!')
@@ -68,7 +68,7 @@ app.get('/get/:query', function(req, res) {
       num : 40
     },
     function(results) {
-      res.send(results);
+      res.jsonp(results);
     }
   );
 })
