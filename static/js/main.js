@@ -19,7 +19,8 @@ $(function() {
     }, renderCards);
   })
 
-  request({max : new Date().getTime()}, renderCards);
+  // start one hour back
+  request({min : new Date().getTime() - 1*60*60*1000 }, renderCards);
 
   function request(params, callback) {
 
@@ -34,7 +35,11 @@ $(function() {
     ['min', 'max', 'count'].forEach(function(k) {
       if (params[k]) p.push(k + "=" + params[k]);
     })
-    $.getJSON("get/" + p.join('&'), callback);
+
+    var url = "get/" + p.join('&') ;
+    // JSONP support for local dev
+    // url = "http://apps.bsouth.ga/" + url + "?callback=?";
+    $.getJSON(url, callback);
   }
 
   function renderCards(data) {
