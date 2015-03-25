@@ -9,7 +9,7 @@ var express = require('express'),
     _ = require('lodash'),
     handlebars = require('handlebars'),
     // jugo library (local ref)
-    jugo = require('jugo'),
+    jugo = require('../jugo'),
     // jugo config
     jugo_config = require('./jugo.json');
 
@@ -25,21 +25,12 @@ var aboutTemplate = handlebars.compile(
 
 // express app + jugo objects
 var app = express();
+
 var J = jugo(jugo_config);
 
 J.open(function() {
   console.log('database open!')
 });
-
-
-app.get('/about', function(req, res) {
-  res.send(aboutTemplate({}))
-});
-
-
-app.get('/', function (req, res) {
-  res.send(indexTemplate({}))
-})
 
 // database query api
 app.get('/get/:query', function(req, res) {
@@ -72,6 +63,17 @@ app.get('/get/:query', function(req, res) {
     }
   );
 })
+
+
+
+app.get('/', function (req, res) {
+  res.send(indexTemplate({}))
+})
+
+app.get('/about', function(req, res) {
+  res.send(aboutTemplate({}))
+});
+
 
 app.get('/404', function(req, res) {
   res.status(404);

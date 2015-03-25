@@ -1,12 +1,10 @@
 $(function() {
 
 
-  var container = d3.select('#cards');
-
-
   $(".button-collapse").sideNav();
 
-
+  var format = d3.format(',');
+  var container = d3.select('#cards');
   var $buttons = $('.hour-btn');
 
   $buttons.click(function() {
@@ -38,7 +36,7 @@ $(function() {
 
     var url = "get/" + p.join('&') ;
     // JSONP support for local dev
-    // url = "http://apps.bsouth.ga/" + url + "?callback=?";
+    url = "http://apps.bsouth.ga/" + url + "?callback=?";
     $.getJSON(url, callback);
   }
 
@@ -72,7 +70,9 @@ $(function() {
         .style('position', 'relative');
 
       if (d.meta.image) {
-        div.append('img')
+        div.append('a')
+        .attr('href', d.url)
+        .append('img')
         .attr('class', 'activator')
         .attr('src', d.meta.image);
       } else {
@@ -81,7 +81,7 @@ $(function() {
 
       div.append('span')
         .attr('class', 'tweet-count z-depth-1')
-        .text("" + d.count + " tweets")
+        .text("" + format(d.count) + " tweets")
         .style('color', "#000")
         .style('background-color', "#fff")
 
@@ -94,10 +94,10 @@ $(function() {
       .attr('class', "card-title grey-text text-darken-4")
       .append('a')
       .attr('href', function(d) { return d.url; })
-      .text(function(d, i) { return "#" + (i+1) + ": " + (d.meta.title || d.url); })
+      .html(function(d, i) { return "#" + (i+1) + ": " + (d.meta.title || d.url); })
 
     content.append('p')
-      .text(function(d) { return d.meta.description; })
+      .html(function(d) { return d.meta.description; })
 
   }
 
@@ -124,3 +124,5 @@ $(function() {
   }
 
 });
+
+
