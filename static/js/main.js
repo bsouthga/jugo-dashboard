@@ -36,7 +36,7 @@ $(function() {
 
     var url = "get/" + p.join('&') ;
     // JSONP support for local dev
-    url = "http://apps.bsouth.ga/" + url + "?callback=?";
+    // url = "http://apps.bsouth.ga/" + url + "?callback=?";
     $.getJSON(url, callback);
   }
 
